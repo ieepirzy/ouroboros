@@ -41,7 +41,19 @@ Prove that exploiting fixed weights beats a conventional design, measured after 
 - [ ] Run the Phase I design on an open-toolchain FPGA (Lattice ECP5 / iCE40 with Yosys + nextpnr)
 - [ ] Mask ROM generation (`OPT-04`) and a ROM-versus-logic comparison per layer
 - [ ] Automated design-space exploration over the mapping dial (`OPT-09`, `OPT-10`), with model accuracy as an objective alongside area, power and timing (`QUA-01`)
-- [ ] A small model on a real shuttle (Tiny Tapeout, or a wafer.space GF180 run)
+- [ ] **First silicon:** a small model on a real shuttle (see below)
+
+#### First silicon plan
+
+**Target:** an 8×8 handwritten-digit classifier (64 → 16 → 10, about 1,200 INT4 weights), using ROM plus a shared multiply-accumulate unit, time-multiplexed, with inputs streamed serially through the narrow pin I/O.
+
+- [ ] Validate the exact RTL on an iCE40 / ECP5 FPGA board before submitting
+- [ ] Put the **hardwired design and the conventional baseline on the same shuttle**, so the comparison is measured on real silicon under identical conditions
+- [ ] Expose internal state through a debug/readout path, to support later fault-injection and reliability work
+- [ ] Submit to a Tiny Tapeout shuttle (sky130, IHP or GF). Rough estimate: 20–40 tiles for both designs. Expect about a year from submission to chips in hand
+- [ ] Alternative for a full die: a wafer.space GF180 run (check current pricing before budgeting)
+
+Area estimates are rough (a sky130 tile is on the order of a thousand gates). Firm numbers come from the Phase I flow.
 
 ## Phase II: Small transformers
 
